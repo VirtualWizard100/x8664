@@ -9,17 +9,18 @@ _start:
         call Exit
 
 Message1:
-	mov eax, 0x1
-	mov edi, 0x1
+	mov eax, 0x1	//write syscall
+	mov edi, 0x1	//stdout
 	mov esi, message1
 	mov edx, len
 	syscall
+	ret
 
 GetName:
-	mov eax, 0
-	mov edi, 0
+	mov eax, 0	//read syscall
+	mov edi, 0	//stdin
 	mov esi, Name
-	mov edx, 50
+	mov edx, 32	//amount of reserved bytes
 	syscall
 	ret
 
@@ -35,8 +36,9 @@ PrintName:
 	mov eax, 0x1
 	mov edi, 0x1
 	mov esi, Name
-	mov edx, 50
+	mov edx, 32
 	syscall
+	ret
 
 PrintEnd:
 	mov eax, 0x1
