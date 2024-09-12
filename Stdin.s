@@ -9,18 +9,18 @@ _start:
         call Exit
 
 Message1:
-	mov eax, 0x1	//write syscall
-	mov edi, 0x1	//stdout
+	mov eax, 0x1	;write syscall
+	mov edi, 0x1	;stdout
 	mov esi, message1
 	mov edx, len
 	syscall
 	ret
 
 GetName:
-	mov eax, 0	//read syscall
-	mov edi, 0	//stdin
+	mov eax, 0	;read syscall
+	mov edi, 0	;stdin
 	mov esi, Name
-	mov edx, 32	//amount of reserved bytes
+	mov edx, 32	;amount of reserved bytes
 	syscall
 	ret
 
@@ -28,7 +28,7 @@ Message2:
 	mov eax, 0x1
 	mov edi, 0x1
 	mov esi, message2
-	mov edx, len
+	mov edx, len2
 	syscall
 	ret
 
@@ -53,15 +53,17 @@ Exit:
 	mov edi, 0
 	syscall
 
-section .data
-	message1:
-		db "What is your name:", 0xa
-	len equ $-message1
-	message2:
-		db "How's it going "
-	len2 equ $-message2
-	End:
-		db "?", 0xa
 section .bss
-	Name:
-		resb 32
+Name:
+        resb 32
+
+section .data
+message1:
+	db "What is your name:", 0xa
+len equ $-message1
+
+message2:
+	db "How's it going "
+len2 equ $-message2
+End:
+	db 0x3f, 0xa
