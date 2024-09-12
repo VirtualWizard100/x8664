@@ -15,7 +15,7 @@ _start:
 	mov [Out], r10b		;storing r10's new value into the empty byte in Out
 	mov al, 1
 	mov dil, 1
-	mov rsi, Out
+	mov esi, Out
 	mov dl, 1
 	syscall
 	jmp exit
