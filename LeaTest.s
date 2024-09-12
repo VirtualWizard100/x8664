@@ -19,6 +19,6 @@ _start:
 	syscall
 	jmp exit
 exit:
-	mov rax, 60
-	mov rdi, 0
+	mov ax, 60
+	mov dil, 0
 	syscall
