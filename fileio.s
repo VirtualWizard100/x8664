@@ -31,7 +31,7 @@ UGO_RX equ 0o555
 UGO_WX equ 0o333
 
 ;openat
-;CWD equ -100
+;current working directory is equal to -100
 
 %macro read 3
 	mov al, 0x0
