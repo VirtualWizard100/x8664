@@ -1,0 +1,20 @@
+1. Starting at address 400575: The argc pointer/rsi gets moved into rax			mov rax, QWORD PTR [rbp-0x10]
+2. 8 gets added to the rax pointer, making it the argv[1] pointer			add rax, 0x8
+3. The value in the rax pointer (the environment variable name) gets loaded into rax	mov rax, QWORD PTR [rax]
+4. The value in rax gets moved into rdi(which is the environment variable name)		mov rdi, rdx
+5. The getenv function gets called							call 400430 <getenv@plt>
+6. The return value of getenv is a pointer to the environment string of the environment mov rsi, rax 
+   variable which was put into rax, which is then moved from rax into rsi as the third
+   arguement in the printf function
+7. rax becomes equal to the argc pointer again						mov rax, QWORD PTR [rbp-0x10]
+8. 8 gets added into rax making it the pointer to the new argv[1] environment variable  add rax, 0x8
+   string from the getenv(argv[1]) function					
+9. the value of the environment variable string get loaded into rax			mov rax, QWORD PTR [rax]
+10.The environment variable string gets moved into rsi, making it the second arguement  mov rsi, rax
+   in the printf function
+11.The 32 bit environment variable name gets moved back into rdi, making it the first   mov edi, 0x400634
+   arguement in the printf function
+12.Clear the eax register								mov eax, 0x0
+13.Call the printf function to print out the string					call 400440 <printf@plt>
+14.Clear the return value of the printf function					mov eax, 0x0
+
