@@ -3,7 +3,7 @@ global _start
 section .text
 _start:
 	mov eax, 0x3e
-	mov edi, 4396
+	mov edi, 0x112c
 	mov esi, 0x9
 	syscall
 
