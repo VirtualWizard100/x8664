@@ -16,7 +16,6 @@ Mmap:
 	mov r10d, r8d
 	syscall
 	ja Ioctl
-	write 1, errmessage, len
 	jmp ErrorExit
 
 Ioctl:
@@ -25,9 +24,11 @@ Ioctl:
 	mov rax, 0x10	;ioctl syscall number
 	mov rsi, 0x00005514	;bit 31 = Read, bit 30 = Write, bits 29-16 = size of arguements, 15-8 = ascii character for group of commands
 	syscall
-	jmp Ioctl
+	ja Ioctl
+	jmp ErrorExit
 
 ErrorExit:
+	write 1, errmessage, len
         mov eax, 0x3c
         mov edi, 0x1
         syscall
@@ -39,7 +40,7 @@ exit:
 
 section .data
 file:
-	db "/dev/bus/usb/001/005", 0	;Path of usb you want to infinitely reset, use lsusb to get the bus directory, and device file
+	db "/dev/bus/usb/001/004", 0	;Path of usb you want to infinitely reset, use lsusb to get the bus directory, and device file
 
 errmessage:
 	db "Couldn't obtain usb device file descriptor.", 0xa
