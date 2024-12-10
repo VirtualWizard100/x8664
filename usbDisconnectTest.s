@@ -21,6 +21,11 @@ exit:
 section .data
 USBDEVFS_DISCONNECT:
 	dd 0x0
-	dd 0x00005517
+	dd 0x00005516
+
+USBDEVFS_CONNECT:
+	dd 0x0
+ 	dd 0x00005517
+
 file:
 	db "/dev/bus/usb/001/004", 0
