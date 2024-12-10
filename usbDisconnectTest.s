@@ -20,8 +20,8 @@ exit:
 
 section .data
 USBDEVFS_DISCONNECT:
-	dd 0x0
-	dd 0x00005516
+	dd 0x0		;ifno = corresponds to the bus number, except it's the index of the bus number, for example, bus 1 is interface number 0, bus 2 is interface numer 1, etc
+	dd 0x00005516   ;ioctl_code = magic number for the ioctl code that you want to us to interact with the device, I have an ioctlExplanation on this repo that explains how an ioctl magic number works bitwise
 
 USBDEVFS_CONNECT:
 	dd 0x0
