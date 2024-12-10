@@ -1,0 +1,50 @@
+asm-generic/ioctl.h
+-------------------
+
+_IOC_NRBITS = 8
+_IOC_TYPEBITS = 8
+_IOC_NRSHIFT = 0
+_IOC_SIZEBITS = 14
+
+_IOC_TYPESHIFT = _IOC_NRSHIFT + _IOC_NRBITS (_IOC_TYPESHIFT = 0 + 8) -> 8
+_IOC_SIZESHIFT = _IOC_TYPESHIFT + _IOC_TYPEBITS (_IOC_SIZESHIFT = 8 + 8) -> 16
+_IOC_DIRSHIFT = _IOC_SIZESHIFT + _IOC_SIZEBITS (_IOC_DIRSHIFT = 16 + 14) -> 30
+
+_IOC_TYPECHECK(t) (sizeof(t)) -> size of type
+
+#define _IOC(dir, type, nr, size) \
+	(((dir) << _IOC_DIRSHIFT) | \ -> dir shifted by 30 bits
+	 ((type) << _IOC_TYPESHIFT) | \ -> device type shifted by 8 bits
+	 ((nr) << _IOC_NRSHIFT) | \ -> nr shifted by 0
+	 ((size) << _IOC_SIZESHIFT)) -> size shifted by 16 bits
+
+32 bit look of _IOC 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+^-^ ^-------------------------^ ^-------------^ ^-------------^
+31-30		29-16			15-8		7-0
+
+31-30 = direction(dir), 29-16 = size, 15-8 = type, 7-0 = command number(nr)
+
+direction = _IOC_NONE, _IOC_READ, _IOC_WRITE
+
+asm-generic/int-ll64.h
+----------------------
+
+typedef __signed__ char __s8 -> 8 bit signed hex value
+
+typedef unsigned char __u8 -> 8 bit unsigned hex value
+
+typedef __signed__ short __s16 -> 16 bit signed hex value
+
+typedef unsigned short __u16 -> 16 bit unsigned hex value
+
+typedef __signed__ int __s32 -> 32 bit signed hex value
+
+typedef unsigned int __u32 -> 32 bit unsigned hex value
+
+typedef __signed__ long long __s64 -> 64 bit signed hex value
+
+typedef unsigned long long __u64 -> 64 bit unsigned hex value
+
+
+
