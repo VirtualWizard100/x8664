@@ -37,12 +37,12 @@ exit:
 
 section .data
 
-( /usr/include/linux/usbdevice_fs.h ) Line 516706: struct usbdevfs_ioctl {
-							int     ifno;           /* interface 0..N ; negative numbers reserved */
-					        	int     ioctl_code;     /* MUST encode size + direction of data so the
-						                                 * macros in <asm/ioctl.h> give correct values */
-        						void *data;     /* param buffer (in, or out) */
-							};
+;( /usr/include/linux/usbdevice_fs.h ) Line 516706: struct usbdevfs_ioctl {
+;							int     ifno;           /* interface 0..N ; negative numbers reserved */
+;					        	int     ioctl_code;     /* MUST encode size + direction of data so the
+;						                                 * macros in <asm/ioctl.h> give correct values */
+;        						void *data;     /* param buffer (in, or out) */
+;							};
 
 struct_USBDEVFS_DISCONNECT:
 	dd 0x0
