@@ -16,7 +16,7 @@ Ioctl:
 	call Openat
 	mov eax, 0x10
 	mov edi, r11d
-	mov esi, 0xc0105512
+	mov esi, 0xc0105512		;( /usr/include/linux/usbdevice_fs.h ) Line 516775: #define USBDEVFS_IOCTL             _IOWR('U', 18, struct usbdevfs_ioctl)
 	lea rdx, [struct_USBDEVFS_CONNECT]
 	syscall
 	nanosleep nanosleep_time, nanosleep_time
@@ -36,6 +36,14 @@ exit:
 	syscall
 
 section .data
+
+( /usr/include/linux/usbdevice_fs.h ) Line 516706: struct usbdevfs_ioctl {
+							int     ifno;           /* interface 0..N ; negative numbers reserved */
+					        	int     ioctl_code;     /* MUST encode size + direction of data so the
+						                                 * macros in <asm/ioctl.h> give correct values */
+        						void *data;     /* param buffer (in, or out) */
+							};
+
 struct_USBDEVFS_DISCONNECT:
 	dd 0x0
 	dd 0x00005516
