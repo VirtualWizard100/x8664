@@ -8,7 +8,7 @@
 	jmp %%valueSort
 
 %%valueSort:
-	cmp r13, r11
+	cmp r10, r11
         je %%write
 	mov r12b, BYTE [%1 + r13]
 	inc r13
